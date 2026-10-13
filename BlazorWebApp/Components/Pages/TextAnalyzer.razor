@@ -1,0 +1,30 @@
+﻿@page "/textAnalyzer"
+@inject TextAnalyticsClient client;
+@using Azure.AI.TextAnalytics
+
+<PageTitle>Text Analyzer</PageTitle>
+
+<h1>Text Analyzer</h1>
+
+<InputText @bind-Value="_text" />
+
+<button class="btn btn-primary" @onclick="AnalyzeText">Click me</button>
+
+@if (Sentiment != null)
+{
+    <p>Sentiment: @Sentiment.Sentiment</p>
+    <p>Positive score: @Sentiment.ConfidenceScores.Positive</p>
+    <p>Neutral score: @Sentiment.ConfidenceScores.Neutral</p>
+    <p>Negative score: @Sentiment.ConfidenceScores.Negative</p>
+}
+
+@code {
+    private DocumentSentiment? Sentiment = null;
+    private string _text = string.Empty;
+
+    private async Task AnalyzeText()
+    {
+        var response = await client.AnalyzeSentimentAsync(_text);
+        Sentiment = response.Value;
+    }
+}

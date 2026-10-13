@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="BlazorWebApp/BlazorWebApp.csproj" />
+  <Project Path="Dottor21LanguageServiceConsole/Dottor21LanguageServiceConsole.csproj" />
+</Solution>
